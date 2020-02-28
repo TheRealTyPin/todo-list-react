@@ -16,10 +16,11 @@ export const buildStoreFactory = ({
 	composeWithDevTools({})(applyMiddleware(thunk)),
 )
 
-
-export default buildStoreFactory({
+export const injectedDependencies = {
 	createStore,
 	applyMiddleware,
 	thunk,
 	composeWithDevTools,
-})
+}
+
+export default buildStoreFactory(injectedDependencies)

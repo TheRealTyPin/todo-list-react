@@ -1,4 +1,8 @@
-import { buildStoreFactory } from './store'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction'
+
+import { buildStoreFactory, injectedDependencies } from './store'
 
 describe('store', () => {
 	it('creates the Store', () => {
@@ -25,5 +29,14 @@ describe('store', () => {
 		expect(composeWithDevToolsL2).toHaveBeenCalledWith('mock middleware applied')
 		expect(createStore).toHaveBeenCalledWith(rootReducer, preloadedState, 'mock devtool middleware')
 		expect(store).toEqual('mock redux store')
+	})
+
+	it('has all the dependencies', () => {
+		expect(injectedDependencies).toEqual({
+			createStore,
+			applyMiddleware,
+			thunk,
+			composeWithDevTools,
+		})
 	})
 })
