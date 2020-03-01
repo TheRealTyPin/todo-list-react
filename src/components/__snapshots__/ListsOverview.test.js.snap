@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListsOverview snapshot matches 1`] = `
+<div
+  className="lists-overview"
+>
+  <h2>
+    My lists
+  </h2>
+  <ul>
+    <li
+      className=""
+      key="some id"
+      onClick={[Function]}
+    >
+      test name
+    </li>
+  </ul>
+  <AddInput
+    lable="new list name"
+    onAdd={[Function]}
+  />
+</div>
+`;
