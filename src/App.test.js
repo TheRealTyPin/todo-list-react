@@ -13,4 +13,9 @@ describe('App', () => {
 		const wrapper = shallow(<App />)
 		expect(wrapper.find('.App-header')).toHaveText('Stuff I need to do')
 	})
+
+	it('renders ListsOverview', () => {
+		const wrapper = shallow(<App />)
+		expect(wrapper.find('ListsOverview')).toExist()
+	})
 })
