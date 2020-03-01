@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddInput snapshot matches 1`] = `
+<form
+  className="add-input"
+  onSubmit={[Function]}
+>
+  <input
+    aria-label="placeholder text here"
+    onChange={[Function]}
+    placeholder="placeholder text here"
+    type="text"
+    value=""
+  />
+  <button
+    aria-label="create new list"
+  >
+    +
+  </button>
+</form>
+`;
