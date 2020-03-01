@@ -2,6 +2,10 @@
 
 exports[`rootReducer initial state matches snapshot 1`] = `
 Object {
+  "selectedList": Object {
+    "id": undefined,
+    "name": undefined,
+  },
   "todoLists": Array [],
 }
 `;

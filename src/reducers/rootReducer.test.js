@@ -18,4 +18,14 @@ describe('rootReducer', () => {
 			todoLists: [],
 		}))
 	})
+
+	it('to have no selectedList as default', () => {
+		const initialState = rootReducer()
+		expect(initialState).toEqual(expect.objectContaining({
+			selectedList: {
+				id: undefined,
+				name: undefined,
+			},
+		}))
+	})
 })
