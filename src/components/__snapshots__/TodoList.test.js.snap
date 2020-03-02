@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListsOverview snapshot matches 1`] = `
+<section
+  className="todo-list"
+>
+  <header>
+    <h2>
+      test list name
+    </h2>
+    <p>
+      0 tasks remaining
+    </p>
+  </header>
+  <footer>
+    <button>
+      Clear completed tasks
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      Delete list
+    </button>
+  </footer>
+</section>
+`;
