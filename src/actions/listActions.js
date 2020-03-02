@@ -16,3 +16,9 @@ export const selectList = (id, name) => ({
 	id,
 	name,
 })
+
+export const deleteList = (id, name) => ({
+	type: actionType.deleteList,
+	id,
+	name,
+})

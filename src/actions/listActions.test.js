@@ -1,4 +1,4 @@
-import { addList, addListWithId, addListFactory, selectList } from './listActions'
+import { addList, addListWithId, addListFactory, selectList, deleteList } from './listActions'
 
 describe('listActions', () => {
 	it('has addListWithId action', () => {
@@ -35,6 +35,15 @@ describe('listActions', () => {
 		const action = selectList('uuid_5432', 'my list')
 		expect(action).toEqual({
 			type: 'SELECT_LIST',
+			name: 'my list',
+			id: 'uuid_5432',
+		})
+	})
+
+	it('has deleteList action', () => {
+		const action = deleteList('uuid_5432', 'my list')
+		expect(action).toEqual({
+			type: 'DELETE_LIST',
 			name: 'my list',
 			id: 'uuid_5432',
 		})
