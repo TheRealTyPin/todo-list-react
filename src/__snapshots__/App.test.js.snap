@@ -10,5 +10,6 @@ exports[`App snapshot matches 1`] = `
     Stuff I need to do
   </h1>
   <ListsOverview />
+  <TodoList />
 </div>
 `;

@@ -18,4 +18,9 @@ describe('App', () => {
 		const wrapper = shallow(<App />)
 		expect(wrapper.find('ListsOverview')).toExist()
 	})
+
+	it('renders TodoList', () => {
+		const wrapper = shallow(<App />)
+		expect(wrapper.find('TodoList')).toExist()
+	})
 })
