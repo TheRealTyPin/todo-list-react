@@ -12,6 +12,12 @@ exports[`ListsOverview snapshot matches 1`] = `
       0 tasks remaining
     </p>
   </header>
+  <main>
+    <AddInput
+      lable="new task name"
+      onAdd={[Function]}
+    />
+  </main>
   <footer>
     <button>
       Clear completed tasks

@@ -2,6 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { deleteList } from '../actions/listActions'
+import { addTodoWithId } from '../actions/todoActions'
 
 import { TodoListView } from './TodoList'
 
@@ -53,5 +54,19 @@ describe('ListsOverview', () => {
 		expect(deleteButton).toHaveText('Delete list')
 		deleteButton.simulate('click')
 		expect(dispatch).toHaveBeenCalledWith(deleteList('12345', 'test list name'))
+	})
+
+	it('dispatches a addTodo action', () => {
+		const selectedList = {
+			id: '12345',
+			name: 'test list',
+			todos: [],
+		}
+		const dispatch = jest.fn()
+		const wrapper = shallow(<TodoListView selectedList={selectedList} dispatch={dispatch} />)
+		wrapper.find('AddInput').prop('onAdd')('new todo name')
+		expect(dispatch).toHaveBeenCalledWith(
+			addTodoWithId('new todo name', {id: '12345', name: 'test list'}, expect.toBeAUuid()),
+		)
 	})
 })

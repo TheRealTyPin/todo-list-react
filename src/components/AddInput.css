@@ -24,7 +24,7 @@
   border: 0;
   color: inherit;
   border-bottom: 1px solid currentColor;
-	font-size: 1.1rem;
+	font-size: inherit;
   outline: none;
   padding: 0.25em;
 	box-shadow: 0 0 currentColor;

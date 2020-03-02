@@ -24,6 +24,14 @@
   font-size: 1rem;
 }
 
+.todo-list main {
+  padding: var(--spacer);
+}
+
+.todo-list .add-input button {
+  color: var(--clr-primary);
+}
+
 .todo-list footer {
   display: flex;
   justify-content: space-evenly;
