@@ -14,6 +14,8 @@ const selectedListReducer = (rootState = {}, action = {}) => {
 			id,
 			name,
 		}
+	case actionType.deleteList:
+		return initialState
 	default:
 		return state
 	}

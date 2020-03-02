@@ -1,5 +1,5 @@
 import selectedListReducer from './selectedListReducer'
-import { selectList } from '../actions/listActions'
+import { selectList, deleteList } from '../actions/listActions'
 
 describe('selectedListReducer', () => {
 	it('returns the same state if action does not affect it', () => {
@@ -26,6 +26,19 @@ describe('selectedListReducer', () => {
 		expect(state).toEqual({
 			id: '1234',
 			name: 'name just for readability',
+		})
+	})
+
+	it('handles deleteList action', () => {
+		const initialState = {
+			id: 'some id',
+			name: 'my list',
+		}
+		const action = deleteList('some id', 'my list')
+		const state = selectedListReducer({selectedList: initialState}, action)
+		expect(state).toEqual({
+			id: undefined,
+			name: undefined,
 		})
 	})
 })

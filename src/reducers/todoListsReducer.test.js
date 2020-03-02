@@ -1,5 +1,5 @@
 import todoListsReducer from './todoListsReducer'
-import { addList } from '../actions/listActions'
+import { addList, deleteList } from '../actions/listActions'
 
 describe('todoListsReducer', () => {
 	it('returns the same state if action does not affect it', () => {
@@ -25,5 +25,20 @@ describe('todoListsReducer', () => {
 			id: action.id,
 			todos: [],
 		}]))
+	})
+
+	it('handles deleteList action', () => {
+		const initialState = [{
+			other: 'stuff',
+		}, {
+			name: 'my list',
+			id: '42',
+			todos: [],
+		}]
+		const action = deleteList('42', 'my list')
+		const state = todoListsReducer({todoLists: initialState}, action)
+		expect(state).toEqual([{
+			other: 'stuff',
+		}])
 	})
 })
