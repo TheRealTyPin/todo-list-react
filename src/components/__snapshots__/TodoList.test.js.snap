@@ -9,10 +9,33 @@ exports[`ListsOverview snapshot matches 1`] = `
       test list name
     </h2>
     <p>
-      0 tasks remaining
+      1 task remaining
     </p>
   </header>
   <main>
+    <div
+      className="todos"
+    >
+      <div
+        className="todo"
+        key="42"
+      >
+        <input
+          checked={false}
+          id="42"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          htmlFor="42"
+        >
+          <span
+            className="custom-checkbox"
+          />
+          hello world
+        </label>
+      </div>
+    </div>
     <AddInput
       lable="new task name"
       onAdd={[Function]}

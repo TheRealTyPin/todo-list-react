@@ -2,16 +2,20 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { deleteList } from '../actions/listActions'
-import { addTodoWithId } from '../actions/todoActions'
+import { addTodoWithId, checkTodo } from '../actions/todoActions'
 
-import { TodoListView } from './TodoList'
+import { TodoListView, getSelectedList } from './TodoList'
 
 describe('ListsOverview', () => {
 	it('snapshot matches', () => {
 		const selectedList = {
 			id: '12345',
 			name: 'test list name',
-			todos: [],
+			todos: [{
+				id: '42',
+				name: 'hello world',
+				done: false,
+			}],
 		}
 		const wrapper = shallow(<TodoListView selectedList={selectedList} />)
 		expect(wrapper).toMatchSnapshot()
@@ -19,6 +23,7 @@ describe('ListsOverview', () => {
 
 	it('shows name of selected list', () => {
 		const selectedList = {
+			id: '42',
 			name: 'test list name',
 			todos: [],
 		}
@@ -36,7 +41,11 @@ describe('ListsOverview', () => {
 
 	it('shows # of remaining todos if 1', () => {
 		const selectedList = {
-			todos: [{done: true}, {done: true}, {done: false}],
+			todos: [
+				{done: true, id: 1},
+				{done: true, id: 2},
+				{done: false, id: 3},
+			],
 		}
 		const wrapper = shallow(<TodoListView selectedList={selectedList} />)
 		expect(wrapper.find('header p')).toHaveText('1 task remaining')
@@ -68,6 +77,39 @@ describe('ListsOverview', () => {
 		expect(dispatch).toHaveBeenCalledWith(
 			addTodoWithId('new todo name', {id: '12345', name: 'test list'}, expect.toBeAUuid()),
 		)
+	})
+
+	it('shows the todos in list', () => {
+		const selectedList = {
+			id: '12345',
+			name: 'test list',
+			todos: [{
+				id: '42',
+				name: 'hello world',
+				done: false,
+			}],
+		}
+		const wrapper = shallow(<TodoListView selectedList={selectedList} />)
+		const firstTask = wrapper.find('.todos').childAt(0)
+		expect(firstTask).toHaveClassName('todo')
+		expect(firstTask.find('label')).toHaveText('hello world')
+	})
+
+	it('dispatches a checkTodo action', () => {
+		const selectedList = {
+			id: '12345',
+			name: 'test list',
+			todos: [{
+				id: '42',
+				name: 'hello world',
+				done: false,
+			}],
+		}
+		const dispatch = jest.fn()
+		const wrapper = shallow(<TodoListView selectedList={selectedList} dispatch={dispatch} />)
+		const firstTask = wrapper.find('.todos').childAt(0)
+		firstTask.find('input').simulate('change', {target: {checked: true}})
+		expect(dispatch).toHaveBeenCalledWith(checkTodo('42', 'hello world', true))
 	})
 
 	it('getSelectedList returns the selected list', () => {

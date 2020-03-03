@@ -4,19 +4,38 @@ import './TodoList.css'
 
 import AddInput from './AddInput'
 import { deleteList } from '../actions/listActions'
-import { addTodo } from '../actions/todoActions'
+import { addTodo, checkTodo } from '../actions/todoActions'
+
+const renderTodo = dispatchCheckTodo => ({id, name, done}) =>
+	<div className="todo" key={id} >
+		<input
+			type="checkbox"
+			id={id}
+			checked={done}
+			onChange={e => dispatchCheckTodo(id, name, e.target.checked)}
+		/>
+		<label htmlFor={id}>
+			<span className="custom-checkbox"></span>
+			{name}
+		</label>
+	</div>
+
 
 export const TodoListView = ({selectedList, dispatch}) => {
 	const { id, name, todos } = selectedList
 	const remainingTodos = todos.filter(({done}) => !done).length
 	const dispatchDeleteList = () => dispatch(deleteList(id, name))
 	const dispatchAddTodo = (name) => dispatch(addTodo(name, selectedList))
+	const dispatchCheckTodo = (id, name, done) => dispatch(checkTodo(id, name, done))
 	return <section className="todo-list">
 		<header>
 			<h2>{name}</h2>
 			<p>{`${remainingTodos} ${remainingTodos===1 ? 'task' : 'tasks'} remaining`}</p>
 		</header>
 		<main>
+			<div className="todos">
+				{todos.map(renderTodo(dispatchCheckTodo))}
+			</div>
 			<AddInput lable="new task name" onAdd={dispatchAddTodo} />
 		</main>
 		<footer>
