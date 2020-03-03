@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 
 import { addListWithId, selectList } from '../actions/listActions'
 
-import { ListsOverviewView } from './ListsOverview'
+import { ListsOverviewView, getTodoLists, getSelectedListId } from './ListsOverview'
 
 describe('ListsOverview', () => {
 	it('snapshot matches', () => {
@@ -38,5 +38,29 @@ describe('ListsOverview', () => {
 		const wrapper = shallow(<ListsOverviewView todoLists={lists} selectedListId="42" dispatch={dispatch} />)
 		expect(wrapper.find('ul').childAt(0)).not.toHaveClassName('active')
 		expect(wrapper.find('ul').childAt(1)).toHaveClassName('active')
+	})
+
+	it('getTodoLists returns the todo lists', () => {
+		const state = {
+			todoLists: [
+				{id: '12'},
+				{id: '42'},
+				{id: '152'},
+			],
+			selectedList: {id: '42'},
+		}
+		expect(getTodoLists(state)).toBe(state.todoLists)
+	})
+
+	it('getSelectedListId returns the id of the selected list', () => {
+		const state = {
+			todoLists: [
+				{id: '12'},
+				{id: '42'},
+				{id: '152'},
+			],
+			selectedList: {id: '42'},
+		}
+		expect(getSelectedListId(state)).toBe(state.selectedList.id)
 	})
 })

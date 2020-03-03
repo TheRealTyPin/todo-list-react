@@ -26,8 +26,10 @@ export const TodoListView = ({selectedList, dispatch}) => {
 	</section>
 }
 
+export const getSelectedList = ({todoLists, selectedList}) => todoLists.find(({id}) => id === selectedList.id)
+
 const TodoList = () => {
-	const selectedList = useSelector(({todoLists, selectedList}) => todoLists.find(({id}) => id === selectedList.id))
+	const selectedList = useSelector(getSelectedList)
 	const dispatch = useDispatch()
 	if(!selectedList) return null
 	return <TodoListView selectedList={selectedList} dispatch={dispatch} />

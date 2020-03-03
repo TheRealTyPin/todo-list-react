@@ -69,4 +69,16 @@ describe('ListsOverview', () => {
 			addTodoWithId('new todo name', {id: '12345', name: 'test list'}, expect.toBeAUuid()),
 		)
 	})
+
+	it('getSelectedList returns the selected list', () => {
+		const state = {
+			todoLists: [
+				{id: '12'},
+				{id: '42'},
+				{id: '152'},
+			],
+			selectedList: {id: '42'},
+		}
+		expect(getSelectedList(state)).toBe(state.todoLists[1])
+	})
 })

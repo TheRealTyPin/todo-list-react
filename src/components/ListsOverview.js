@@ -23,9 +23,13 @@ export const ListsOverviewView = ({todoLists, selectedListId, dispatch}) => {
 	</div>
 }
 
+export const getTodoLists = R.prop('todoLists')
+
+export const getSelectedListId = ({selectedList}) => selectedList.id
+
 const ListsOverview = () => {
-	const todoLists = useSelector(R.prop('todoLists'))
-	const selectedListId = useSelector(({selectedList}) => selectedList.id)
+	const todoLists = useSelector(getTodoLists)
+	const selectedListId = useSelector(getSelectedListId)
 	const dispatch = useDispatch()
 	return <ListsOverviewView todoLists={todoLists} selectedListId={selectedListId} dispatch={dispatch} />
 }
