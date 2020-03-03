@@ -1,6 +1,6 @@
 import todoListsReducer from './todoListsReducer'
 import { addList, deleteList } from '../actions/listActions'
-import { addTodo } from '../actions/todoActions'
+import { addTodo, checkTodo } from '../actions/todoActions'
 
 describe('todoListsReducer', () => {
 	it('returns the same state if action does not affect it', () => {
@@ -71,5 +71,36 @@ describe('todoListsReducer', () => {
 		const action = addTodo('new todo', {id: 'wrong id', name: 'my list'})
 		const state = todoListsReducer({todoLists: initialState}, action)
 		expect(state).toBe(initialState)
+	})
+
+	it('handles checkTodo action', () => {
+		const initialState = [{
+			name: 'my list',
+			id: '123345',
+			todos: [{
+				id: '42',
+				name: 'check me',
+				done: false,
+			}, {
+				id: '14',
+				name: 'leave me',
+				done: false,
+			}],
+		}]
+		const action = checkTodo('42', 'check me', true)
+		const state = todoListsReducer({todoLists: initialState}, action)
+		expect(state).toEqual([{
+			name: 'my list',
+			id: '123345',
+			todos: [{
+				id: '42',
+				name: 'check me',
+				done: true,
+			}, {
+				id: '14',
+				name: 'leave me',
+				done: false,
+			}],
+		}])
 	})
 })

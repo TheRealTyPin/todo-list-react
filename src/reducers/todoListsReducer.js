@@ -1,5 +1,6 @@
 import * as R from 'ramda'
 import actionType from '../actions/type'
+import { defaultIfEqual } from './util'
 
 const initialState = []
 
@@ -27,9 +28,18 @@ const addTodo = (state, listId, id, name) => {
 	)
 }
 
+const keepRefUpdate = fn => x => R.pipe(fn, defaultIfEqual(x))(x)
+
+const checkTodo = (state, id, done) => keepRefUpdate(R.map(
+	keepRefUpdate((todolist) => ({
+		...todolist,
+		todos: R.map(todo => todo.id === id ? {...todo, done} : todo)(todolist.todos),
+	})),
+))(state)
+
 const todoListsReducer = (rootState = {}, action = {}) => {
 	const { todoLists: state = initialState } = rootState
-	const { type, id, name, toList } = action
+	const { type, id, name, toList, done } = action
 	switch(type){
 	case actionType.addList:
 		return addList(state, id, name)
@@ -37,6 +47,8 @@ const todoListsReducer = (rootState = {}, action = {}) => {
 		return deleteList(state, id)
 	case actionType.addTodo:
 		return addTodo(state, toList.id, id, name)
+	case actionType.checkTodo:
+		return checkTodo(state, id, done)
 	default:
 		return state
 	}
