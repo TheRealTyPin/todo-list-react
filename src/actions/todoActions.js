@@ -12,3 +12,10 @@ export const addTodoWithId = (name, toList, id) => ({
 export const addTodoFactory = uuid => (name, toList) => addTodoWithId(name, toList, uuid())
 
 export const addTodo = addTodoFactory(uuid)
+
+export const checkTodo = (id, name, done) => ({
+	type: actionType.checkTodo,
+	id,
+	name,
+	done,
+})

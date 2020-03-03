@@ -1,4 +1,4 @@
-import { addTodo, addTodoWithId, addTodoFactory } from './todoActions'
+import { addTodo, addTodoWithId, addTodoFactory, checkTodo } from './todoActions'
 
 describe('listActions', () => {
 	it('has addTodoWithId action', () => {
@@ -39,6 +39,16 @@ describe('listActions', () => {
 				name: 'list name',
 			},
 			id: expect.toBeAUuid(),
+		})
+	})
+
+	it('has checkTodo action', () => {
+		const action = checkTodo('todo id', 'todo name here', true)
+		expect(action).toEqual({
+			type: 'CHECK_TODO',
+			id: 'todo id',
+			name: 'todo name here',
+			done: true,
 		})
 	})
 })

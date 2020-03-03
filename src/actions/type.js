@@ -4,6 +4,7 @@ const actionType = Object.freeze({
 	deleteList: 'DELETE_LIST',
 
 	addTodo: 'ADD_TODO',
+	checkTodo: 'CHECK_TODO',
 })
 
 export default actionType
