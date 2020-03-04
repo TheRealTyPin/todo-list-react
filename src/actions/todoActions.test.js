@@ -1,4 +1,4 @@
-import { addTodo, addTodoWithId, addTodoFactory, checkTodo } from './todoActions'
+import { addTodo, addTodoWithId, addTodoFactory, checkTodo, clearCompletedTodos } from './todoActions'
 
 describe('listActions', () => {
 	it('has addTodoWithId action', () => {
@@ -49,6 +49,17 @@ describe('listActions', () => {
 			id: 'todo id',
 			name: 'todo name here',
 			done: true,
+		})
+	})
+
+	it('has clearCompletedTodos action', () => {
+		const action = clearCompletedTodos({id: '1234', name: 'list name'})
+		expect(action).toEqual({
+			type: 'CLEAR_COMPLETED_TODOS',
+			fromList: {
+				id: '1234',
+				name: 'list name',
+			},
 		})
 	})
 })

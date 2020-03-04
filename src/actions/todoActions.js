@@ -19,3 +19,8 @@ export const checkTodo = (id, name, done) => ({
 	name,
 	done,
 })
+
+export const clearCompletedTodos = fromList => ({
+	type: actionType.clearCompletedTodos,
+	fromList: R.pick(['id', 'name'], fromList),
+})

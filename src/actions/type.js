@@ -5,6 +5,7 @@ const actionType = Object.freeze({
 
 	addTodo: 'ADD_TODO',
 	checkTodo: 'CHECK_TODO',
+	clearCompletedTodos: 'CLEAR_COMPLETED_TODOS',
 })
 
 export default actionType
