@@ -21,6 +21,12 @@ describe('ListsOverview', () => {
 		expect(wrapper).toMatchSnapshot()
 	})
 
+	it('shows nothing if no selected List', () => {
+		const selectedList = undefined
+		const wrapper = shallow(<TodoListView selectedList={selectedList} />)
+		expect(wrapper).toBeEmptyRender()
+	})
+
 	it('shows name of selected list', () => {
 		const selectedList = {
 			id: '42',

@@ -22,6 +22,7 @@ const renderTodo = dispatchCheckTodo => ({id, name, done}) =>
 
 
 export const TodoListView = ({selectedList, dispatch}) => {
+	if(!selectedList) return null
 	const { id, name, todos } = selectedList
 	const remainingTodos = todos.filter(({done}) => !done).length
 	const dispatchDeleteList = () => dispatch(deleteList(id, name))
@@ -51,7 +52,6 @@ export const getSelectedList = ({todoLists, selectedList}) => todoLists.find(({i
 const TodoList = () => {
 	const selectedList = useSelector(getSelectedList)
 	const dispatch = useDispatch()
-	if(!selectedList) return null
 	return <TodoListView selectedList={selectedList} dispatch={dispatch} />
 }
 
