@@ -4,7 +4,7 @@ import './TodoList.css'
 
 import AddInput from './AddInput'
 import { deleteList } from '../actions/listActions'
-import { addTodo, checkTodo } from '../actions/todoActions'
+import { addTodo, checkTodo, clearCompletedTodos } from '../actions/todoActions'
 
 const renderTodo = dispatchCheckTodo => ({id, name, done}) =>
 	<div className="todo" key={id} >
@@ -27,6 +27,7 @@ export const TodoListView = ({selectedList, dispatch}) => {
 	const dispatchDeleteList = () => dispatch(deleteList(id, name))
 	const dispatchAddTodo = (name) => dispatch(addTodo(name, selectedList))
 	const dispatchCheckTodo = (id, name, done) => dispatch(checkTodo(id, name, done))
+	const dispatchClearCompletedTodos = () => dispatch(clearCompletedTodos(selectedList))
 	return <section className="todo-list">
 		<header>
 			<h2>{name}</h2>
@@ -39,7 +40,7 @@ export const TodoListView = ({selectedList, dispatch}) => {
 			<AddInput lable="new task name" onAdd={dispatchAddTodo} />
 		</main>
 		<footer>
-			<button>Clear completed tasks</button>
+			<button onClick={dispatchClearCompletedTodos}>Clear completed tasks</button>
 			<button onClick={dispatchDeleteList}>Delete list</button>
 		</footer>
 	</section>

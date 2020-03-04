@@ -42,7 +42,9 @@ exports[`ListsOverview snapshot matches 1`] = `
     />
   </main>
   <footer>
-    <button>
+    <button
+      onClick={[Function]}
+    >
       Clear completed tasks
     </button>
     <button

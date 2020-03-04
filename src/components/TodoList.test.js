@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { deleteList } from '../actions/listActions'
-import { addTodoWithId, checkTodo } from '../actions/todoActions'
+import { addTodoWithId, checkTodo, clearCompletedTodos } from '../actions/todoActions'
 
 import { TodoListView, getSelectedList } from './TodoList'
 
@@ -110,6 +110,23 @@ describe('ListsOverview', () => {
 		const firstTask = wrapper.find('.todos').childAt(0)
 		firstTask.find('input').simulate('change', {target: {checked: true}})
 		expect(dispatch).toHaveBeenCalledWith(checkTodo('42', 'hello world', true))
+	})
+
+	it('dispatches a clearCompletedTodos action', () => {
+		const selectedList = {
+			id: '12345',
+			name: 'test list',
+			todos: [{
+				id: '42',
+				name: 'hello world',
+				done: false,
+			}],
+		}
+		const dispatch = jest.fn()
+		const wrapper = shallow(<TodoListView selectedList={selectedList} dispatch={dispatch} />)
+		const clearButton = wrapper.find('footer').childAt(0)
+		clearButton.simulate('click')
+		expect(dispatch).toHaveBeenCalledWith(clearCompletedTodos({id: '12345', name: 'test list'}))
 	})
 
 	it('getSelectedList returns the selected list', () => {
