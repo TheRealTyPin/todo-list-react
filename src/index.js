@@ -7,11 +7,13 @@ import './index.css'
 import App from './App'
 import buildStore from './store/store'
 import rootReducer from './reducers/rootReducer'
+import { syncToLocalStore, getStateFromLocalStore } from './store/localStore'
 
 const store = buildStore({
 	rootReducer,
-	preloadedState: undefined,
+	preloadedState: getStateFromLocalStore(window.localStorage, 'todo list'),
 })
+store.subscribe(syncToLocalStore(window.localStorage, 'todo list', store))
 
 ReactDOM.render(
 	<Provider store={store}>
