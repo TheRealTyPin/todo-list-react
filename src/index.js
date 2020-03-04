@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import './index.css'
 
 import App from './App'
-import buildStore from './store'
+import buildStore from './store/store'
 import rootReducer from './reducers/rootReducer'
 
 const store = buildStore({
