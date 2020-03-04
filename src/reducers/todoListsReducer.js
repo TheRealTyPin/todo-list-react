@@ -37,9 +37,22 @@ const checkTodo = (state, id, done) => keepRefUpdate(R.map(
 	})),
 ))(state)
 
+const clearCompletedTodos = (state, fromListId) => {
+	const index = R.findIndex(({id}) => id === fromListId, state)
+	if(index === -1) return state
+	return R.adjust(
+		index,
+		todoList => ({
+			...todoList,
+			todos: todoList.todos.filter(({done}) => !done),
+		}),
+		state,
+	)
+}
+
 const todoListsReducer = (rootState = {}, action = {}) => {
 	const { todoLists: state = initialState } = rootState
-	const { type, id, name, toList, done } = action
+	const { type, id, name, toList, done, fromList } = action
 	switch(type){
 	case actionType.addList:
 		return addList(state, id, name)
@@ -49,6 +62,8 @@ const todoListsReducer = (rootState = {}, action = {}) => {
 		return addTodo(state, toList.id, id, name)
 	case actionType.checkTodo:
 		return checkTodo(state, id, done)
+	case actionType.clearCompletedTodos:
+		return clearCompletedTodos(state, fromList.id)
 	default:
 		return state
 	}

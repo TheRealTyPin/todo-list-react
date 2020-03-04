@@ -1,6 +1,6 @@
 import todoListsReducer from './todoListsReducer'
 import { addList, deleteList } from '../actions/listActions'
-import { addTodo, checkTodo } from '../actions/todoActions'
+import { addTodo, checkTodo, clearCompletedTodos } from '../actions/todoActions'
 
 describe('todoListsReducer', () => {
 	it('returns the same state if action does not affect it', () => {
@@ -102,5 +102,75 @@ describe('todoListsReducer', () => {
 				done: false,
 			}],
 		}])
+	})
+
+	it('handles clearCompletedTodos action', () => {
+		const initialState = [{
+			name: 'my list',
+			id: '111',
+			todos: [{
+				id: '42',
+				name: 'check me',
+				done: true,
+			}, {
+				id: '14',
+				name: 'leave me',
+				done: false,
+			}],
+		}, {
+			name: 'other list',
+			id: '123345',
+			todos: [{
+				id: '43',
+				name: 'don\'t touch me',
+				done: true,
+			}],
+		}]
+		const action = clearCompletedTodos({id: '111', name: 'my list'})
+		const state = todoListsReducer({todoLists: initialState}, action)
+		expect(state).toEqual([{
+			name: 'my list',
+			id: '111',
+			todos: [{
+				id: '14',
+				name: 'leave me',
+				done: false,
+			}],
+		}, {
+			name: 'other list',
+			id: '123345',
+			todos: [{
+				id: '43',
+				name: 'don\'t touch me',
+				done: true,
+			}],
+		}])
+	})
+
+	it('dismisses clearCompletedTodos action if no list with id', () => {
+		const initialState = [{
+			name: 'my list',
+			id: '111',
+			todos: [{
+				id: '42',
+				name: 'check me',
+				done: true,
+			}, {
+				id: '14',
+				name: 'leave me',
+				done: false,
+			}],
+		}, {
+			name: 'other list',
+			id: '123345',
+			todos: [{
+				id: '43',
+				name: 'don\'t touch me',
+				done: true,
+			}],
+		}]
+		const action = clearCompletedTodos({id: 'wrong id', name: 'my list'})
+		const state = todoListsReducer({todoLists: initialState}, action)
+		expect(state).toBe(initialState)
 	})
 })
