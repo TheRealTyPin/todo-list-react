@@ -13,6 +13,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: sterlingwes/gh-pages-deploy-action@v1.1
         with:
-          access-token: ${{ secrets.GITHUB_TOKEN }}
+          access-token: ${{ secrets.ACCESS_TOKEN }}
           source-directory: build
           build-command: npm run build
