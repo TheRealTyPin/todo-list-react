@@ -6,6 +6,7 @@ import './ListsOverview.css'
 import AddInput from './AddInput'
 import { addList, selectList } from '../actions/listActions'
 
+// TODO: Add prop-types
 export const ListsOverviewView = ({todoLists, selectedListId, dispatch}) => {
 	const dispatchAddList = name => dispatch(addList(name))
 	const dispatchSelectList = (id, name) => dispatch(selectList(id, name))

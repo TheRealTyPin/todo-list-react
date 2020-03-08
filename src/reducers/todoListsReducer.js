@@ -15,6 +15,7 @@ const addList = (state, id, name) => [
 
 const deleteList = (state, id) => state.filter(todo => todo.id !== id)
 
+// TODO: Refactor into mutliple functions
 const addTodo = (state, listId, id, name) => {
 	const index = R.findIndex(({id}) => id === listId, state)
 	if(index === -1) return state
@@ -30,6 +31,7 @@ const addTodo = (state, listId, id, name) => {
 
 const keepRefUpdate = fn => x => R.pipe(fn, defaultIfEqual(x))(x)
 
+// TODO: Refactor into mutliple functions
 const checkTodo = (state, id, done) => keepRefUpdate(R.map(
 	keepRefUpdate((todolist) => ({
 		...todolist,
@@ -37,6 +39,7 @@ const checkTodo = (state, id, done) => keepRefUpdate(R.map(
 	})),
 ))(state)
 
+// TODO: Refactor into mutliple functions?
 const clearCompletedTodos = (state, fromListId) => {
 	const index = R.findIndex(({id}) => id === fromListId, state)
 	if(index === -1) return state

@@ -15,7 +15,8 @@ describe('AddInput', () => {
 			preventDefault: jest.fn(),
 		}
 		const wrapper = shallow(<AddInput lable="placeholder text here" onAdd={onAdd} />)
-		wrapper.find('input').simulate('change', { target: { value: 'test input' } })
+        wrapper.find('input').simulate('change', { target: { value: 'test input' } })
+        // TODO: try simulate()
 		wrapper.find('form').prop('onSubmit')(mockSubmitEvent)
 		expect(onAdd).toHaveBeenCalledWith('test input')
 		expect(mockSubmitEvent.preventDefault).toHaveBeenCalled()
